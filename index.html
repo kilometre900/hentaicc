@@ -1,92 +1,104 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>مرحبًا بك</title>
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      text-align: center;
-      direction: rtl;
-      font-family: Arial;
-    }
-    a {
-      display: inline-block;
-      margin-top: 20%;
-      padding: 20px 40px;
-      background-color: #222;
-      color: white;
-      text-decoration: none;
-      font-size: 24px;
-      border: 2px solid white;
-      border-radius: 10px;
-      transition: 0.3s;
-    }
-    a:hover {
-      background-color: white;
-      color: black;
-    }
-  </style>
-</head>
-<body>
-  <h1>مرحبًا بك في عالم المانجا</h1>
-  <a href="memto.html">أنا وحواي ميمتو</a>
-</body>
-</html><!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>مكتبة المانغا</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مانجا حواي ميمتو - اقرأ مانجا مترجمة</title>
   <style>
     body {
       background: #111;
       color: white;
       font-family: sans-serif;
       text-align: center;
+      direction: rtl;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    #notice {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background-color: rgba(0,0,0,0.9);
+      color: white;
+      font-size: 22px;
+      padding: 15px 20px;
+      z-index: 9999;
+      text-align: center;
+      font-weight: bold;
+    }
+    #container {
+      margin-top: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
     }
     input[type="text"] {
-      margin: 50px auto;
       padding: 10px;
       width: 300px;
       font-size: 16px;
       border-radius: 10px;
       border: none;
     }
-    .manga-cover {
-      display: none;
+    #hentai-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      color: #eee;
+      font-size: 18px;
+      border: 2px solid white;
+      border-radius: 12px;
+      padding: 15px 25px;
+      width: 180px;
+      background-color: #222;
+      user-select: none;
+    }
+    #hawai {
       margin-top: 20px;
       cursor: pointer;
+      display: none;
     }
-    .manga-cover img {
+    #hawai img {
       width: 250px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
     #pages {
       display: none;
+      margin-top: 30px;
     }
     #pages img {
       width: 90%;
       max-width: 800px;
       margin: 20px 0;
       box-shadow: 0 0 8px rgba(255,255,255,0.2);
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>مكتبة المانغا</h1>
-  <input type="text" id="search" placeholder="ابحث عن مانغا...">
+  <div id="notice">ملاحظة: لا تدخل الى المانجا مباشرة ابحث عن اسمها</div>
 
-  <div id="hawai" class="manga-cover">
-    <h2>هل هذه المانغا؟: حواي ميمتو</h2>
-    <img src="https://i.postimg.cc/47X53T9N/page-10.jpg" alt="غلاف حواي ميمتو">
+  <div id="container">
+    <input type="text" id="search" placeholder="ابحث عن مانغا...">
+
+    <div id="hentai-list">
+      <div>1: حواي ميمتو</div>
+    </div>
+
+    <div id="hawai">
+      <h2>هل هذه المانغا؟: حواي ميمتو</h2>
+      <img src="https://i.postimg.cc/47X53T9N/page-10.jpg" alt="غلاف حواي ميمتو">
+    </div>
   </div>
 
   <div id="pages">
-    <!-- كل صفحات المانغا -->
+    <!-- صور صفحات المانجا -->
     <img src="https://i.postimg.cc/47X53T9N/page-10.jpg">
     <img src="https://i.postimg.cc/D8Sc068s/page-11.jpg">
     <img src="https://i.postimg.cc/30RFgC1s/page-12.jpg">
@@ -121,12 +133,19 @@
   </div>
 
   <script>
+    const notice = document.getElementById('notice');
     const search = document.getElementById('search');
     const cover = document.getElementById('hawai');
     const pages = document.getElementById('pages');
+    const hentaiList = document.getElementById('hentai-list');
+
+    // إخفاء الملاحظة بعد 5 ثواني
+    setTimeout(() => {
+      notice.style.display = 'none';
+    }, 5000);
 
     search.addEventListener('input', () => {
-      const value = search.value.toLowerCase();
+      const value = search.value.toLowerCase().trim();
       if (value.includes('حواي') || value.includes('ميمتو') || value.includes('hawai')) {
         cover.style.display = 'block';
       } else {
@@ -139,6 +158,7 @@
       cover.style.display = 'none';
       pages.style.display = 'block';
       search.style.display = 'none';
+      hentaiList.style.display = 'none';
     });
   </script>
 
